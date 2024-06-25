@@ -11,8 +11,11 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @SuperBuilder
-public class PurchaseRequest extends BaseRequest {
-    @NotNull
-    @NotBlank
+public class PurchaseRequest extends PriceRequest {
+
+    @KnownProcessor
     private String paymentProcessor;
 }
+
+//    @NotNull
+//    @NotBlank

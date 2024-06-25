@@ -16,8 +16,9 @@ import java.util.stream.Stream;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(PurchaseController.class)
-class PurchaseControllerRequestValidationTest {
+
+@WebMvcTest(PriceController.class)
+class PriceControllerPriceRequestValidationTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
@@ -25,19 +26,17 @@ class PurchaseControllerRequestValidationTest {
 
     static Stream<String> requestIncorrectBodies() {
         return Stream.of(
-                "{\"product\": 1, \"taxNumber\": \"IT12345678900\", \"couponCode\": \"D15\", \"paymentProcessor\": \"\"}",
-                "{\"product\": 1, \"taxNumber\": \"IT12345678900\", \"couponCode\": \"D15\", \"paymentProcessor\": \"null\"}",
-                "{\"product\": null, \"taxNumber\": \"IT12345678900\", \"couponCode\": \"D15\", \"paymentProcessor\": \"paypal\"}",
-                "{\"product\": 1, \"taxNumber\": \"IT12345678900X\", \"couponCode\": \"D15\", \"paymentProcessor\": \"paypal\"}",
-                "{\"product\": 1, \"taxNumber\": \"IT12345678900\", \"couponCode\": \"D150\", \"paymentProcessor\": \"paypal\"}"
+                "{\"product\": null, \"taxNumber\": \"DE123456789\", \"couponCode\": \"D11\"}",
+                "{\"product\": 1, \"taxNumber\": \"DE123456789A\", \"couponCode\": \"D11\"}",
+                "{\"product\": 1, \"taxNumber\": \"DE123456789\", \"couponCode\": \"D121\"}"
         );
     }
 
     @ParameterizedTest
-    @DisplayName("Get Bad Request (status 400) if PurchaseRequest 'paymentProcessor' field is incorrect")
+    @DisplayName("Get Bad Request (status 400) if PriceRequest field is incorrect")
     @MethodSource("requestIncorrectBodies")
     void validatePriceRequest(String requestBody) throws Exception {
-        mockMvc.perform(post("/purchase")
+        mockMvc.perform(post("/calculate-price")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody)
                         .accept(MediaType.APPLICATION_JSON))
@@ -45,11 +44,11 @@ class PurchaseControllerRequestValidationTest {
     }
 
     @Test
-    @DisplayName("Get Ok (status 200) if all PurchaseRequest fields are correct")
+    @DisplayName("Get Ok (status 200) if all PriceRequest fields are correct")
     void priceRequestOKTest() throws Exception {
-        mockMvc.perform(post("/purchase")
+        mockMvc.perform(post("/calculate-price")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"product\": 1, \"taxNumber\": \"IT12345678900\", \"couponCode\": \"D15\", \"paymentProcessor\": \"paypal\"}")
+                        .content("{\"product\": 1, \"taxNumber\": \"DE123456789\", \"couponCode\": \"D15\"}")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
