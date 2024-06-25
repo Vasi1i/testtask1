@@ -2,7 +2,7 @@ version: '2.0'
 services:
   app:
     build:
-      context: /
+      context: .
       dockerfile: Dockerfile
     ports:
       - "8337:8337"
