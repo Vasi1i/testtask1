@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.controller.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,11 +13,9 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionAdviser {
-
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException e) {
-//    public ErrorResponse handleValidationException(MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();
         e.getBindingResult().getAllErrors().forEach(
                 error -> {
@@ -30,10 +27,3 @@ public class ExceptionAdviser {
         return ResponseEntity.badRequest().body(errors);
     }
 }
-    //        return new ErrorResponse(e.getMessage());
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ErrorResponse handleException(Exception e) {
-//
-//        return new ErrorResponse(e.getMessage());
-//    }

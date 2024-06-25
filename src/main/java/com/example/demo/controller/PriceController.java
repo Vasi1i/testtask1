@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class PriceController {
     private final PricingService pricingService;
-
     @PostMapping("/calculate-price")
     public ResponseEntity<PriceResponse> calculatePrice(@Valid @RequestBody PriceRequest request) {
-        System.out.println("request = " + request);
             PriceResponse response = new PriceResponse(pricingService.calculatePrice(request));
             return ResponseEntity.ok(response);
     }

@@ -20,24 +20,19 @@ public class PricingService {
     private final CouponRepository couponRepository;
     private final Map<String, Country> countries;
 
-
     public BigDecimal calculatePrice(PriceRequest request) throws InvalidInputException {
-        System.out.println("countries = " + countries);
-//        Product product = productRepository.findById(priceRequest.getProduct())
-//                .orElseThrow(() -> new InvalidInputException("Product not found"));
-        Product product = new Product(1L, "iphone", new BigDecimal("100"));
+        Product product = productRepository.findById(request.getProduct())
+                .orElseThrow(() -> new InvalidInputException("Product not found"));
         BigDecimal price = product.getPrice();
         if (request.getCouponCode() != null) {
-            Coupon coupon = new Coupon(111L, "P10", new BigDecimal("6"), true);
-//            Coupon coupon = couponRepository.findByCode(priceRequest.getCouponCode())
-//                    .orElseThrow(() -> new InvalidInputException("Invalid coupon code"));
+            Coupon coupon = couponRepository.findByCode(request.getCouponCode())
+                    .orElseThrow(() -> new InvalidInputException("Invalid coupon code"));
             if (coupon.isPercentage()) {
                 price = price.subtract(price.multiply(coupon.getDiscountValue().divide(new BigDecimal("100"))));
             } else {
                 price = price.subtract(coupon.getDiscountValue());
             }
         }
-        System.out.println("getCountry = " + getCountry(request.getTaxNumber()).getCurrency().getCode());
         return price.add(price.multiply(getCountry(request.getTaxNumber()).getTax()));
     }
     private Country getCountry(String taxNumber) {

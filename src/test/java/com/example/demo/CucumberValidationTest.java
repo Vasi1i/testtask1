@@ -1,5 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo;
 
+import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,9 +16,10 @@ import java.util.stream.Stream;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@CucumberContextConfiguration
 @SpringBootTest
 @AutoConfigureMockMvc
-class PurchaseControllerPriceRequestValidationTest {
+class CucumberValidationTest {
     @Autowired
     private MockMvc mockMvc;
 

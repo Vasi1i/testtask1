@@ -1,7 +1,6 @@
 package com.example.demo.service.payment;
 
 import lombok.ToString;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,13 +23,3 @@ public class StripeProcessor implements PaymentProcessor {
         return amount.floatValue();
     }
 }
-
-//    @Override
-//    public String getProcessorName() {
-//        return name;
-//    }
-//    private final String name;
-
-//    public StripePaymentProcessor(@Value("${STRIPE.PAYMENT.NAME}") String name) {
-//        this.name = name;
-//    }

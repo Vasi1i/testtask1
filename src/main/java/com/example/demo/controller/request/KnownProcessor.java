@@ -1,6 +1,5 @@
 package com.example.demo.controller.request;
 
-import com.example.demo.service.payment.PaymentProcessor;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -15,9 +14,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface KnownProcessor {
     String message() default "Unknown payment processor";
-//    Class<? extends PaymentProcessor> processorClass();
-    //    PaymentProcessor paymentProcessor();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-
 }

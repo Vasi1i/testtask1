@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class PriceRequest {
     private final String TAX_NUMBER_VALIDATOR = "^(?i)(DE\\d{9}|IT\\d{11}|GR\\d{9}|FR[A-Z]{2}\\d{9})$";
     private final String COUPON_CODE_VALIDATOR = "^[pdPD]([1-9]|[1-9][0-9]|[1][0][0])$";
