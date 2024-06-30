@@ -1,5 +1,6 @@
-package com.example.demo.controller.request;
+package com.example.demo.annotation;
 
+import com.example.demo.validator.PaymentProcessorValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

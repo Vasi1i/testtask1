@@ -30,6 +30,25 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+<!--			<scope>test</scope>-->
+		</dependency>
+
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+<!--			<scope>test</scope>-->
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-testcontainers</artifactId>
+<!--			<scope>test</scope>-->
+		</dependency>
+
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
@@ -52,9 +71,6 @@
 			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
-
-
-
 
 		<dependency>
 			<groupId>com.h2database</groupId>

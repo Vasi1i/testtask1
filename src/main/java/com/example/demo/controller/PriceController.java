@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.controller.request.PriceRequest;
-import com.example.demo.controller.response.PriceResponse;
+import com.example.demo.controller.dto.request.PriceRequest;
+import com.example.demo.controller.dto.response.PriceResponse;
 import com.example.demo.service.pricing.PricingService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class PriceController {
     private final PricingService pricingService;
+
     @PostMapping("/calculate-price")
     public ResponseEntity<PriceResponse> calculatePrice(@Valid @RequestBody PriceRequest request) {
-            PriceResponse response = new PriceResponse(pricingService.calculatePrice(request));
-            return ResponseEntity.ok(response);
+        System.out.println(request.getProduct());
+        return ResponseEntity.ok(pricingService.calculatePrice(request));
     }
 }

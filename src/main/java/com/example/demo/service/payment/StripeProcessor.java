@@ -8,18 +8,17 @@ import java.math.BigDecimal;
 @ToString
 @Service("stripe")
 public class StripeProcessor implements PaymentProcessor {
-    private final int STRIPE_MIN_AMOUNT = 100;
-
     @Override
     public boolean isPaymentSuccessful(BigDecimal amount) {
         return pay(bigDecimalToFloat(amount));
     }
 
-    private boolean pay(float amount) {
+    private boolean pay(Float amount) {
+        int STRIPE_MIN_AMOUNT = 100;
         return amount >= STRIPE_MIN_AMOUNT;
     }
 
-    private float bigDecimalToFloat(BigDecimal amount) {
+    private Float bigDecimalToFloat(BigDecimal amount) {
         return amount.floatValue();
     }
 }

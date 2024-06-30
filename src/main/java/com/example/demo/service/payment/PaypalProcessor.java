@@ -1,5 +1,6 @@
 package com.example.demo.service.payment;
 
+import com.example.demo.exception.PaymentProcessorException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -7,21 +8,20 @@ import java.math.RoundingMode;
 
 @Service("paypal")
 public class PaypalProcessor implements PaymentProcessor {
-    private final int PAYPAL_MAX_AMOUNT = 100_000;
-
     @Override
-    public boolean isPaymentSuccessful(BigDecimal amount) throws Exception {
+    public boolean isPaymentSuccessful(BigDecimal amount) throws PaymentProcessorException {
         makePayment(bigDecimalToInt(amount));
         return true;
     }
 
-    private void makePayment(int amount) throws Exception {
-        if (amount > PAYPAL_MAX_AMOUNT) {
-            throw new Exception("Amount exceeds the limit for Paypal");
+    private void makePayment(Integer amount) throws PaymentProcessorException {
+        int PAYPAL_LIMIT_AMOUNT = 100_000;
+        if (amount > PAYPAL_LIMIT_AMOUNT) {
+            throw new PaymentProcessorException("Amount exceeds the limit (" + PAYPAL_LIMIT_AMOUNT + ") for Paypal");
         }
     }
 
-    private int bigDecimalToInt(BigDecimal amount) {
+    private Integer bigDecimalToInt(BigDecimal amount) {
         return amount.setScale(0, RoundingMode.CEILING).intValue();
     }
 }
