@@ -10,17 +10,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-//@RunWith(MockitoJUnitRunner.class)
-//@RunWith(SpringRunner.class)
-//@ContextConfiguration(classes = {DemoApplication.class, ConfigTest.class})
+@ContextConfiguration(classes = {DemoApplication.class, ConfigTest.class})
 @CucumberContextConfiguration
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class DemoApplicationTests {
 	@Test
 	void contextLoads() {
 	}
 }
-
-//	@Autowired
-//	ApplicationContext context;
-//@SpringBootTest

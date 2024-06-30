@@ -17,7 +17,6 @@ public class PriceController {
 
     @PostMapping("/calculate-price")
     public ResponseEntity<PriceResponse> calculatePrice(@Valid @RequestBody PriceRequest request) {
-        System.out.println(request.getProduct());
         return ResponseEntity.ok(pricingService.calculatePrice(request));
     }
 }

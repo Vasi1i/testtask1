@@ -21,10 +21,6 @@ public class CountryLoader {
 
     @Bean
     public Map<String, Country> initCountries() {
-        System.out.println(code);
-        System.out.println(name);
-        System.out.println(tax);
-        System.out.println(currency);
         Map<String, Country> countries = new HashMap<>();
         for (int i = 0; i < code.size(); i++) {
             countries.put(code.get(i), new Country(code.get(i), name.get(i), new BigDecimal(tax.get(i)), currency.get(i)));
